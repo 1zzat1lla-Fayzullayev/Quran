@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Poppins: ["Poppins", "sans-serif"],
-        Montserrat: ["Montserrat", "sans-serif"],
+        Poppins: "Poppins",
+        Montserrat: "Montserrat",
       },
       backgroundImage: {
         bgQuranRegister: "url('./assets/bgRegister.jpg')",
