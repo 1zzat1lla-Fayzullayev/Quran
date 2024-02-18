@@ -57,9 +57,9 @@ function Navbar() {
     };
   }, []);
   return (
-    <div className="bg-[#27374D] h-[100vh]">
+    <div>
       <Wrapper>
-        <nav className="flex justify-evenly md:justify-around items-center bg-[#091d22] rounded-[12px] my-[5px] md:my-[10px] p-[8px] font-Poppins">
+        <nav className="flex justify-evenly md:justify-around items-center bg-[#272f33] rounded-[12px] my-[5px] md:my-[10px] p-[8px] font-Poppins">
           <h1 className="text-white text-[25px] md:text-[35px] font-semibold cursor-pointer font-Poppins">
             Quran
           </h1>

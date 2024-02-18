@@ -8,5 +8,22 @@
 }
 body {
   box-sizing: border-box;
-  background: #27374d;
+  background: #1f2125;
+}
+
+.card:hover .card__element {
+  border: #2ca4ab;
+  background-color: #2ca4ab;
+}
+.card:hover .onBlue-p {
+  color: #2ca4ab;
+}
+.card:hover .card__element p {
+  color: black;
+}
+
+.card__element {
+  width: calc(2.5 * 1rem);
+  height: calc(2.5 * 1rem);
+  padding: 17px;
 }

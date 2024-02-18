@@ -15,6 +15,7 @@ import SignUpSection from "../shared/SignUpSection";
 import ChanglerHeading from "../shared/ChanglerHeading";
 import LinkSection from "../shared/LinkSection";
 import Button from "../shared/Button";
+import Hero from "../components/Hero";
 
 function Register() {
   const [user, setUser] = useState("");
@@ -122,50 +123,57 @@ function Register() {
   }, []);
   return (
     <>
-      <div className="bg-bgQuranRegister bg-cover h-[100vh] bg-no-repeat font-Poppins">
+      <div>
         {user ? (
-          <Navbar />
+          <>
+            <Navbar />
+            <Hero />
+          </>
         ) : (
-          <div className="bg-[#133841] backdrop-blur-[60px] absolute top-[5%] md:top-[15%] left-[50%] transform translate-x-[-50%] w-[250px] md:w-[400px] h-auto flex  items-center flex-col rounded-[16px]">
-            {/* O'zgaruvchi heading yani h1 */}
-            <ChanglerHeading
-              isChange={isChange}
-              onForgetChange={onForgetChange}
-            />
-            <div className="input__div flex justify-center items-center flex-col bg-transparent m-[10px] p-[5px] w-[80%] rounded-[6px]  backdrop-filter backdrop-blur-[60px]">
-              {isChange ? (
-                // Ro'yxatdan o'tish
-                <SignInSection
-                  handleChange={handleChange}
-                  handleSignToRegister={handleSignToRegister}
-                />
-              ) : (
-                <>
-                  {/* Forget password */}
-                  <ForgetPassSection
-                    onForgetChange={onForgetChange}
+          <div className="bg-bgQuranRegister bg-cover h-[100vh] bg-no-repeat font-Poppins">
+            <div className="bg-[#133841] backdrop-blur-[60px] absolute top-[5%] md:top-[15%] left-[50%] transform translate-x-[-50%] w-[250px] md:w-[400px] h-auto flex  items-center flex-col rounded-[16px]">
+              {/* O'zgaruvchi heading yani h1 */}
+              <ChanglerHeading
+                isChange={isChange}
+                onForgetChange={onForgetChange}
+              />
+              <div className="input__div flex justify-center items-center flex-col bg-transparent m-[10px] p-[5px] w-[80%] rounded-[6px]  backdrop-filter backdrop-blur-[60px]">
+                {isChange ? (
+                  // Ro'yxatdan o'tish
+                  <SignInSection
                     handleChange={handleChange}
-                    forgetHandler={forgetHandler}
+                    handleSignToRegister={handleSignToRegister}
                   />
+                ) : (
+                  <>
+                    {/* Forget password */}
+                    <ForgetPassSection
+                      onForgetChange={onForgetChange}
+                      handleChange={handleChange}
+                      forgetHandler={forgetHandler}
+                    />
 
-                  {/* Tizimga kirish */}
-                  <SignUpSection
-                    handleChange={handleChange}
-                    handleSignToEmailandPassword={handleSignToEmailandPassword}
-                    onForgetChange={onForgetChange}
-                  />
-                </>
-              )}
+                    {/* Tizimga kirish */}
+                    <SignUpSection
+                      handleChange={handleChange}
+                      handleSignToEmailandPassword={
+                        handleSignToEmailandPassword
+                      }
+                      onForgetChange={onForgetChange}
+                    />
+                  </>
+                )}
+              </div>
+              <LinkSection
+                handleClickChangeClasses={handleClickChangeClasses}
+                isChange={isChange}
+                forgetHandlerClass={forgetHandlerClass}
+              />
+              <Button
+                handleRegisterGoogle={handleRegisterGoogle}
+                google={google}
+              />
             </div>
-            <LinkSection
-              handleClickChangeClasses={handleClickChangeClasses}
-              isChange={isChange}
-              forgetHandlerClass={forgetHandlerClass}
-            />
-            <Button
-              handleRegisterGoogle={handleRegisterGoogle}
-              google={google}
-            />
           </div>
         )}
       </div>

@@ -23,7 +23,16 @@ function App() {
           <LoadingSvg />
         </div>
       ) : (
-        <div>{!isLogged ? <Register /> : <Navbar />}</div>
+        <div>
+          {!isLogged ? (
+            <Register />
+          ) : (
+            <>
+              <Navbar />
+              <Hero />
+            </>
+          )}
+        </div>
       )}
     </>
   );
