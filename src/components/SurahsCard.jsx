@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import LoadingSvg from "../svg/LoadingSvg";
 
-function SurahsCard() {
+function SurahsCard({ search }) {
   const [surahsData, setSurahsData] = useState([]);
+  const [filteredSurahs, setFilteredSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,6 +19,7 @@ function SurahsCard() {
 
         if (result.data && Array.isArray(result.data.surahs)) {
           setSurahsData(result.data.surahs);
+          setFilteredSurahs(result.data.surahs);
         } else {
           throw new Error("Invalid data format received from the API");
         }
@@ -29,8 +32,15 @@ function SurahsCard() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const filtered = surahsData.filter((surah) =>
+      surah.englishName.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredSurahs(filtered);
+  }, [search, surahsData]);
+
   if (loading) {
-    return <p>Loading...</p>;
+    <LoadingSvg />;
   }
 
   if (error) {
@@ -40,7 +50,7 @@ function SurahsCard() {
   return (
     <>
       <div className="flex justify-center items-center flex-wrap gap-[15px] mt-[50px]">
-        {surahsData.map((surah) => (
+        {filteredSurahs.map((surah) => (
           <div key={surah.number}>
             <Card surah={surah} />
           </div>

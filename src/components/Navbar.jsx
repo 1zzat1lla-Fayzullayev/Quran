@@ -28,6 +28,7 @@ function Navbar() {
   };
   const handleShowMobileNav = () => {
     setShowMobileNav(!showMobileNav);
+    document.body.classList.toggle("overflow-hidden");
   };
 
   useEffect(() => {
