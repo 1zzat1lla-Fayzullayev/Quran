@@ -4,7 +4,7 @@ function NavbarMobile({ handleShowMobileNav }) {
   return (
     <>
       <div
-        className={`mobile__nav w-full h-full bg-[#272f33] absolute top-0 left-0 right-0 bottom-0`}
+        className={`mobile__nav w-full h-full bg-[#272f33] z-[999] absolute top-0 left-0 right-0 bottom-0`}
       >
         <i
           className={`bx bx-x absolute right-0 text-red-600 text-[40px] m-[15px] cursor-pointer`}
