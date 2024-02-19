@@ -131,7 +131,7 @@ function Register() {
           </>
         ) : (
           <div className="bg-bgQuranRegister bg-cover h-[100vh] bg-no-repeat font-Poppins">
-            <div className="bg-[#133841] backdrop-blur-[60px] absolute top-[5%] md:top-[15%] left-[50%] transform translate-x-[-50%] w-[250px] md:w-[400px] h-auto flex  items-center flex-col rounded-[16px]">
+            <div className="bg-[#133841] backdrop-blur-[60px] absolute top-[20%] md:top-[15%] left-[50%] transform translate-x-[-50%] w-[250px] md:w-[400px] h-auto flex  items-center flex-col rounded-[16px]">
               {/* O'zgaruvchi heading yani h1 */}
               <ChanglerHeading
                 isChange={isChange}
