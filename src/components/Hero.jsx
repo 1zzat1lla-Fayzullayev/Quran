@@ -7,7 +7,7 @@ function Hero() {
     setSearch(e.target.value);
   };
   return (
-    <div className="flex justify-center items-center flex-col">
+    <div className="flex pt-[20vh] justify-center items-center flex-col">
       <h1 className="text-[50px] font-semibold text-white m-[20px] font-Poppins">
         AL Quran
       </h1>
