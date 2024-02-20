@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import LoadingSvg from "../svg/LoadingSvg";
+import SelectedSurah from "../pages/SelectedSurah";
+import { useNavigate, useParams } from "react-router-dom";
 
 function SurahsCard({ search }) {
   const [surahsData, setSurahsData] = useState([]);
   const [filteredSurahs, setFilteredSurahs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedSurahcard, setSelectedSurah] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +24,10 @@ function SurahsCard({ search }) {
         if (result.data && Array.isArray(result.data.surahs)) {
           setSurahsData(result.data.surahs);
           setFilteredSurahs(result.data.surahs);
+          setLoading(false);
         } else {
           throw new Error("Invalid data format received from the API");
         }
-        setLoading(false);
       } catch (error) {
         setError(error);
         setLoading(false);
@@ -39,6 +43,11 @@ function SurahsCard({ search }) {
     setFilteredSurahs(filtered);
   }, [search, surahsData]);
 
+  const handleSurahClick = (clickedSurah) => {
+    setSelectedSurah(clickedSurah);
+    navigate(`/surah/${clickedSurah.number}`);
+  };
+
   if (loading) {
     <LoadingSvg />;
   }
@@ -51,11 +60,25 @@ function SurahsCard({ search }) {
     <>
       <div className="flex justify-center items-center flex-wrap gap-[15px] mt-[50px]">
         {filteredSurahs.map((surah) => (
-          <div key={surah.number}>
+          <div key={surah.number} onClick={() => handleSurahClick(surah)}>
             <Card surah={surah} />
           </div>
         ))}
       </div>
+
+      {/* {selectedSurahcard && (
+        //  <SelectedSurah
+        // selectedSurah={selectedSurahcard}
+        // />
+        <div>
+          <h2 className="text-white">
+            Selected Surah: {selectedSurahcard.englishName}
+          </h2>
+          <p>Arabic Name: {selectedSurahcard.name}</p>
+          <p>Revelation Type: {selectedSurahcard.revelationType}</p>
+          Add more information as needed
+        </div>
+      )} */}
     </>
   );
 }
