@@ -65,20 +65,6 @@ function SurahsCard({ search }) {
           </div>
         ))}
       </div>
-
-      {/* {selectedSurahcard && (
-        //  <SelectedSurah
-        // selectedSurah={selectedSurahcard}
-        // />
-        <div>
-          <h2 className="text-white">
-            Selected Surah: {selectedSurahcard.englishName}
-          </h2>
-          <p>Arabic Name: {selectedSurahcard.name}</p>
-          <p>Revelation Type: {selectedSurahcard.revelationType}</p>
-          Add more information as needed
-        </div>
-      )} */}
     </>
   );
 }

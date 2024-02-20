@@ -12,6 +12,10 @@ function Navbar() {
   const [userPhoto, setUserPhoto] = useState(null);
   const [isLoginOnEmail, setIsLoginOnEmail] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
+  const [navbarBackground, setNavbarBackground] = useState({
+    backgroundColor: "#272f33",
+    backdropFilter: "blur(0px)",
+  });
   const dropdownRef = useRef(null);
 
   const handleShowProfile = () => {
@@ -29,6 +33,21 @@ function Navbar() {
   const handleShowMobileNav = () => {
     setShowMobileNav(!showMobileNav);
     document.body.classList.toggle("overflow-hidden");
+  };
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    if (scrollPosition > 50) {
+      setNavbarBackground({
+        backgroundColor: "#3c4347",
+        backdropFilter: "blur(100px)",
+      });
+    } else {
+      setNavbarBackground({
+        backgroundColor: "#272f33",
+        backdropFilter: "blur(0px)",
+      });
+    }
   };
 
   useEffect(() => {
@@ -52,42 +71,46 @@ function Navbar() {
       }
     });
     document.addEventListener("click", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       unsubscribe();
+      document.removeEventListener("click", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   return (
     <div>
-      <Wrapper>
-        <nav className="flex fixed w-full z-[777] justify-evenly md:justify-around items-center bg-[#272f33] rounded-[12px] my-[5px] md:my-[10px] p-[8px] font-Poppins">
-          <h1 className="text-white text-[25px] md:text-[35px] font-semibold cursor-pointer font-Poppins">
-            Quran
-          </h1>
-          {/* List */}
-          <List />
-          {!isLoginOnEmail ? (
-            <div className="flex relative" ref={dropdownRef}>
-              <div>
-                {userPhoto && (
-                  <img
-                    src={userPhoto}
-                    alt="User Photo"
-                    className="border-2 md:border-4 border-gray-400 rounded-full w-[33px] h-[33px] md:w-12 md:h-12 cursor-pointer"
-                    onClick={handleShowProfile}
-                  />
-                )}
-              </div>
-              {showProfile && <ShowProfile handleLogOut={handleLogOut} />}
+      <nav
+        className="flex fixed w-[100%] z-[777] justify-evenly md:justify-around items-center bg-[#272f33] rounded-bl-[15px] rounded-br-[15px] p-[8px] font-Poppins"
+        style={navbarBackground}
+      >
+        <h1 className="text-white text-[25px] md:text-[35px] font-semibold cursor-pointer font-Poppins">
+          Quran
+        </h1>
+        {/* List */}
+        <List />
+        {!isLoginOnEmail ? (
+          <div className="flex relative" ref={dropdownRef}>
+            <div>
+              {userPhoto && (
+                <img
+                  src={userPhoto}
+                  alt="User Photo"
+                  className="border-2 md:border-4 border-gray-400 rounded-full w-[33px] h-[33px] md:w-12 md:h-12 cursor-pointer"
+                  onClick={handleShowProfile}
+                />
+              )}
             </div>
-          ) : (
-            // LogOut
-            <LogOutButton handleLogOut={handleLogOut} />
-          )}
-          {/* Hamburger */}
-          <Hamburger handleShowMobileNav={handleShowMobileNav} />
-        </nav>
-      </Wrapper>
+            {showProfile && <ShowProfile handleLogOut={handleLogOut} />}
+          </div>
+        ) : (
+          // LogOut
+          <LogOutButton handleLogOut={handleLogOut} />
+        )}
+        {/* Hamburger */}
+        <Hamburger handleShowMobileNav={handleShowMobileNav} />
+      </nav>
       {/* NavMobile */}
       {showMobileNav && (
         <NavbarMobile handleShowMobileNav={handleShowMobileNav} />
