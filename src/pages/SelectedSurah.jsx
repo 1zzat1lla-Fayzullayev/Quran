@@ -34,11 +34,9 @@ function SelectedSurah() {
         .flat()
     : [];
 
-  const audioSources = Array(validAudioURLs.length)
-    .fill()
-    .map((_, index) => (
-      <source key={index} src={validAudioURLs[index]} type="audio/mp3" />
-    ));
+  const audioSources = validAudioURLs.map((url, index) => (
+    <source key={index} src={url} type="audio/mp3" />
+  ));
 
   return (
     <>
@@ -53,33 +51,37 @@ function SelectedSurah() {
                 {surah.name}
               </h2>
             </div>
-            <div className="flex justify-center items-center flex-wrap w-[80%] md:w-[30%] rounded-[50%] m-auto text-[25px] mt-[100px]">
-              {validAudioURLs.length > 0 ? (
-                <div>
-                  <audio controls>
-                    {audioSources}
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
-              ) : (
-                <p>No audio available</p>
-              )}
-              {surah.ayahs.map((v, i) => {
-                return (
-                  <div
-                    key={i}
-                    className="font-Montserrat flex items-center justify-center text-center"
-                  >
-                    <div className="relative">
-                      <h1 className="text-[30px] m-[2px]">۝</h1>
-                      <span className="text-white absolute left-0 bottom-0 top-[14px] right-0 text-[18px]">
-                        {getArabicNumerals(i + 1)}
-                      </span>
-                    </div>
-                    {v.text}
+            <div className="flex justify-center items-center flex-col w-[80%] md:w-[100%] rounded-[50%] text-[25px] mt-[100px]">
+              <div>
+                {validAudioURLs.length > 0 ? (
+                  <div>
+                    <audio controls>
+                      {audioSources}
+                      Your browser does not support the audio element.
+                    </audio>
                   </div>
-                );
-              })}
+                ) : (
+                  <p>Audio topilmadi :(</p>
+                )}
+              </div>
+              <div className="w-[100%]">
+                {surah.ayahs.map((v, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="font-Montserrat flex items-center justify-center text-center w-[100%]"
+                    >
+                      <div className="relative">
+                        <h1 className="text-[30px] m-[2px]">۝</h1>
+                        <span className="text-white absolute left-0 bottom-0 top-[14px] right-0 text-[18px]">
+                          {getArabicNumerals(i + 1)}
+                        </span>
+                      </div>
+                      <p>{v.text}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </Wrapper>
         </div>
