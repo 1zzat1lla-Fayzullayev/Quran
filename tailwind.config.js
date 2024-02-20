@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         Poppins: "Poppins",
         Montserrat: "Montserrat",
+        Arabic: "Scheherazade New",
       },
       backgroundImage: {
         bgQuranRegister: "url('./assets/bgRegister.jpg')",
