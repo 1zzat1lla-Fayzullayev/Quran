@@ -46,3 +46,7 @@ html {
   height: calc(2.5 * 1rem);
   padding: 17px;
 }
+
+.audio-playing p {
+  color: #ff0000;
+}
