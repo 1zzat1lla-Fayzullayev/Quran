@@ -1,4 +1,7 @@
 import { useRef, useState, useEffect } from "react";
+import sound from "../../assets/sound.png";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AudioPlayer({
   validAudioURLs,
@@ -8,6 +11,10 @@ function AudioPlayer({
 }) {
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showDiv, setShowDiv] = useState(false);
+  const [selecedAyah, setSelectedAyah] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleEnded = () => {
@@ -19,30 +26,66 @@ function AudioPlayer({
 
     if (audioRef.current) {
       audioRef.current.addEventListener("ended", handleEnded);
-      return () => {
-        audioRef.current.removeEventListener("ended", handleEnded);
-      };
     }
   }, [validAudioURLs, currentAudioIndex]);
-
   const playAudio = (audioUrl, index) => {
     setCurrentAudioIndex(index);
     audioRef.current.src = audioUrl;
     audioRef.current.play();
+    setIsPlaying(true);
+  };
+  const pauseAudio = () => {
+    audioRef.current.pause();
+    setIsPlaying(false);
+  };
+  const toggleAudio = () => {
+    if (isPlaying) {
+      pauseAudio();
+    } else {
+      playAudio(validAudioURLs[currentAudioIndex], currentAudioIndex);
+    }
+  };
+  const handleClickAyah = (clickedSurah) => {
+    setSelectedAyah(clickedSurah);
+    navigate(`/ayahs/${clickedSurah.numberInSurah}`);
   };
 
   return (
     <div className="flex justify-center items-center my-[20px] mt-[50px]">
       {validAudioURLs && validAudioURLs.length > 0 ? (
-        <div>
-          <audio
-            controls
-            ref={audioRef}
-            onPlay={() => handleAudioPlay(currentAudioIndex)}
-            onPause={handleAudioPause}
-          >
-            {audioSources}
-          </audio>
+        <div className="flex justify-between items-center w-[100%]">
+          <div>
+            <div className="flex flex-col items-center">
+              <img
+                src={sound}
+                alt="sound image"
+                onClick={toggleAudio}
+                style={{ cursor: "pointer" }}
+                className="w-[70px] bg-[#DDE6ED] rounded-[50%] p-[5px]"
+              />
+              {isPlaying && (
+                <button onClick={pauseAudio} className="mt-[5px]">
+                  Pause
+                </button>
+              )}
+            </div>
+            <audio
+              ref={audioRef}
+              onPlay={() => handleAudioPlay(currentAudioIndex)}
+            >
+              {validAudioURLs.map((audioUrl, index) => (
+                <source key={index} src={audioUrl} type="audio/mp3" />
+              ))}
+            </audio>
+          </div>
+          <div>
+            <p
+              className="bg-[#DDE6ED] text-black p-[5px] rounded-[10px] cursor-pointer"
+              onClick={handleClickAyah}
+            >
+              Tarjima qilish
+            </p>
+          </div>
         </div>
       ) : (
         <p>Audio topilmadi :(</p>

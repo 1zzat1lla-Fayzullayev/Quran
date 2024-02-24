@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Wrapper from "../layout/Wrapper";
-import ArabicText from "../shared/selectedSurah/ArabicText";
 import ArabicNumber from "../shared/selectedSurah/ArabicNumber";
 import AudioPlayer from "../shared/selectedSurah/AudioPlayer";
 

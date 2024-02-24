@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import "./loading.css";
 import LoadingSvg from "./svg/LoadingSvg";
 import SelectedSurah from "./pages/SelectedSurah";
+import UzbTranslate from "./pages/UzbTranslate";
 function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +30,7 @@ function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/surah/:number" element={<SelectedSurah />} />
+            <Route path="/ayahs/:numberInSurah" element={<UzbTranslate />} />
             <Route
               path="/"
               element={!isLogged ? <Register /> : <AuthenticatedRoutes />}
