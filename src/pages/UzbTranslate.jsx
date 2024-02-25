@@ -6,11 +6,12 @@ function UzbTranslate() {
   const [translate, setTranslate] = useState(null);
   const param = useParams();
   const [loading, setLoading] = useState(true);
+  const apiUrl = `https://api.alquran.cloud/v1/surah/${param.numberInSurah}/uz.sodik`;
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://api.alquran.cloud/v1/surah/${param.numberInSurah}/uz.sodik`)
+      .get(apiUrl)
       .then((res) => {
         setTranslate(res.data.data.ayahs);
         console.log(res.data.data);
