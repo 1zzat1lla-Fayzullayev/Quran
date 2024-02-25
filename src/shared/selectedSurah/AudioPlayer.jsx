@@ -8,6 +8,7 @@ function AudioPlayer({
   handleAudioPause,
   audioSources,
   handleAudioPlay,
+  numberOfTranslatingSurah
 }) {
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const audioRef = useRef(null);
@@ -46,8 +47,7 @@ function AudioPlayer({
     }
   };
   const handleClickAyah = (clickedSurah) => {
-    setSelectedAyah(clickedSurah);
-    navigate(`/ayahs/${clickedSurah.numberInSurah}`);
+    navigate(`/translate/${numberOfTranslatingSurah}`);
   };
 
   return (

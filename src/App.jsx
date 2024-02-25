@@ -30,11 +30,15 @@ function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/surah/:number" element={<SelectedSurah />} />
-            <Route path="/ayahs/:numberInSurah" element={<UzbTranslate />} />
+            <Route
+              path="/translate/:numberInSurah"
+              element={<UzbTranslate />}
+            />
             <Route
               path="/"
               element={!isLogged ? <Register /> : <AuthenticatedRoutes />}
             />
+            <Route path="*" element={<>Bunday sahifa mavjud emas :(</>} />
           </Routes>
         )}
       </Router>

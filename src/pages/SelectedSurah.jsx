@@ -68,6 +68,7 @@ function SelectedSurah() {
                 handleAudioEnded={handleAudioEnded}
                 handleAudioPlay={handleAudioPlay}
                 validAudioURLs={validAudioURLs}
+                numberOfTranslatingSurah={param.number}
               />
               {surah.ayahs.map((v, i) => (
                 <div key={i}>

@@ -10,9 +10,9 @@ function UzbTranslate() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://api.alquran.cloud/v1/surah/${param.number}/uz.sodik`)
+      .get(`http://api.alquran.cloud/v1/surah/${param.numberInSurah}/uz.sodik`)
       .then((res) => {
-        // setTranslate(res.data.data.ayahs);
+        setTranslate(res.data.data.ayahs);
         console.log(res.data.data);
         setLoading(false);
       })
@@ -25,20 +25,20 @@ function UzbTranslate() {
 
   return (
     <div>
-      {/* {loading ? (
+      {loading ? (
         <p>Loading translation...</p>
       ) : (
         <>
           {translate.map((ayah, index) => (
-            <div className="py-[20px] w-[80%] m-auto" key={index}>
-              <p className="font-Poppins text-[17px] font-semibold">
+            <div className="py-[20px] w-[80%] m-auto " key={index}>
+              <p className="text-[15px] md:text-[20px] text-white font-Poppins font-normal">
                 {ayah.numberInSurah}. {ayah.text}
               </p>
             </div>
           ))}
           {translate.length === 0 && <p>Error loading translation</p>}
         </>
-      )} */}
+      )}
     </div>
   );
 }
