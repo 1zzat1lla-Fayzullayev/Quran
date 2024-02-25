@@ -93,7 +93,7 @@ function Register() {
         "users",
         JSON.stringify({ uid: data.user.uid, email: data.user.email })
       );
-      toast.success("Assalomu alekom Xush kelibsiz!!!");
+      toast.success("Assalomu alekom. Xush kelibsiz!");
     } catch (error) {
       toast.error("Email yoki parol xato");
     }
@@ -111,7 +111,7 @@ function Register() {
         "users",
         JSON.stringify({ uid: data.user.uid, email: data.user.email })
       );
-      toast.success("Assalomu alekom Xush kelibsiz!!!");
+      toast.success("Assalomu alekom. Xush kelibsiz!");
     } catch (error) {
       console.log(error);
     }

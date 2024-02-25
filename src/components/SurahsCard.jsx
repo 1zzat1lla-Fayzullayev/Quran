@@ -49,7 +49,7 @@ function SurahsCard({ search }) {
   };
 
   if (loading) {
-    <LoadingSvg />;
+    <h1>Biroz kuting...</h1>;
   }
 
   if (error) {

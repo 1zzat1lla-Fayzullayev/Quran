@@ -8,7 +8,7 @@ function AudioPlayer({
   handleAudioPause,
   audioSources,
   handleAudioPlay,
-  numberOfTranslatingSurah
+  numberOfTranslatingSurah,
 }) {
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const audioRef = useRef(null);
@@ -22,13 +22,20 @@ function AudioPlayer({
       if (currentAudioIndex < validAudioURLs.length - 1) {
         setCurrentAudioIndex((prevIndex) => prevIndex + 1);
         playAudio(validAudioURLs[currentAudioIndex + 1], currentAudioIndex + 1);
+      } else {
+        console.log("All audio tracks have ended");
       }
     };
-
     if (audioRef.current) {
       audioRef.current.addEventListener("ended", handleEnded);
     }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener("ended", handleEnded);
+      }
+    };
   }, [validAudioURLs, currentAudioIndex]);
+
   const playAudio = (audioUrl, index) => {
     setCurrentAudioIndex(index);
     audioRef.current.src = audioUrl;
